@@ -23,3 +23,5 @@ SQLALCHEMY_DATABASE_URI = "{}+{}://{}:{}@{}:{}/{}?charset=utf8". \
 
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SQLALCHEMY_COMMIT_TEARDOWN = True
+
+SECRET_KEY = '\x88D\xf09\xa0A\xc5V\xbe\x8b\xef\xd7\xd8\xd3\xe6\x98*4'

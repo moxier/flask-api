@@ -24,4 +24,16 @@ class ClientTypeError(APIExcption):
 
 class ParameterException(APIExcption):
     code = 400
-    error_code = 10001
+    error_code = 1001
+
+
+class NotFound(APIExcption):
+    code = 404
+    error_code = 1001
+    msg = "The resource is not found "
+
+
+class AuthFailed(APIExcption):
+    code = 401
+    error_code = 1005
+    msg = 'authorization failed'
