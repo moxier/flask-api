@@ -10,6 +10,11 @@ class Success(APIExcption):
     msg = 'ok'
 
 
+class DeleteSuccess(Success):
+    code = 202
+    error_code = 1
+
+
 class ServerError(APIExcption):
     code = 500
     error_code = 1000
@@ -37,3 +42,9 @@ class AuthFailed(APIExcption):
     code = 401
     error_code = 1005
     msg = 'authorization failed'
+
+
+class Forbidden(APIExcption):
+    code = 403
+    error_code = 1004
+    msg = 'Forbidden permissions'

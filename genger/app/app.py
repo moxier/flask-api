@@ -1,32 +1,22 @@
 """
     Created by Amirk on 2018-07-20.
 """
+from datetime import date
 
-from flask import Flask
+from flask import Flask as _Flask
+from flask.json import JSONEncoder as _JSONEncoder
 
-
-def register_blueprint(app):
-    from app.api.v1 import create_blueprint_v1
-    app.register_blueprint(create_blueprint_v1(), url_prefix='/v1')
-
-
-def register_plugin(app):
-    from app.model.base import db
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
+from app.libs.error_code import ServerError
 
 
-def create_app():
-    app = Flask(__name__)
+class JSONEncoder(_JSONEncoder):
+    def default(self, o):
+        if hasattr(o, 'keys') and hasattr(o, '__getitem__'):
+            return dict(o)
+        if isinstance(o, date):
+            return o.strftime("%Y-%m-%d")
+        raise ServerError()
 
-    # 加载配置文件
-    app.config.from_object('app.config.setting')
-    app.config.from_object('app.config.secure')
 
-    # 注册蓝图
-    register_blueprint(app)
-
-    # 注册插件
-    register_plugin(app)
-    return app
+class Flask(_Flask):
+    json_encoder = JSONEncoder

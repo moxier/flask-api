@@ -2,7 +2,7 @@
     Created by Amirk on 2018-07-20.
 """
 
-from app.app import create_app
+from app import create_app
 
 from app.libs.error import APIExcption
 from app.libs.error_code import ServerError
